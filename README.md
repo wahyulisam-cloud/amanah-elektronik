@@ -1,118 +1,92 @@
-# Amanah Elektronik
+# Amanah Elektronik — Backend & REST API
 
-> Sistem penyewaan perangkat elektronik yang terdiri dari aplikasi administrasi berbasis web, REST API, dan aplikasi mobile untuk pelanggan.
+Backend dan REST API untuk **Amanah Elektronik Rental Management System**, sebuah sistem penyewaan perangkat elektronik yang digunakan untuk mengelola data alat, pelanggan, transaksi penyewaan, pengembalian, dan laporan.
 
-## Tentang Project
+## Tentang
 
-**Amanah Elektronik** adalah sistem informasi penyewaan perangkat elektronik yang dirancang untuk membantu proses pengelolaan alat, pelanggan, transaksi penyewaan, pembayaran, dan pengembalian.
+Repository ini merupakan bagian **backend** dari sistem Amanah Elektronik.
 
-Project ini dikembangkan dalam tiga bagian utama:
+Backend dikembangkan menggunakan **Laravel** dan menyediakan REST API yang digunakan oleh aplikasi **Admin Web** dan **Customer Mobile App**.
 
-* **Admin Web** — digunakan oleh admin untuk mengelola sistem.
-* **REST API** — menangani autentikasi, data, transaksi, dan komunikasi antar aplikasi.
-* **Mobile App** — digunakan pelanggan untuk melihat alat dan melakukan proses penyewaan.
+Sistem Amanah Elektronik terdiri dari tiga repository utama:
 
-## Arsitektur Project
+| Repository | Teknologi | Keterangan |
+|---|---|---|
+| **amanah-elektronik** | Laravel | Backend & REST API |
+| **amanah-elektronik-admin** | React.js | Admin Web |
+| **amanah-elektronik-mobile** | React Native & Expo | Aplikasi Pelanggan |
 
-```text
-                    ┌─────────────────────┐
-                    │   React Native App  │
-                    │      Pelanggan      │
-                    └──────────┬──────────┘
-                               │
-                               │ REST API
-                               ▼
-┌─────────────────────┐   ┌─────────────────────┐
-│     React Admin     │──▶│    Laravel API      │
-│        Web          │   │      Backend        │
-└─────────────────────┘   └──────────┬──────────┘
-                                     │
-                                     ▼
-                              ┌─────────────┐
-                              │    MySQL    │
-                              └─────────────┘
-```
+## Fitur
 
-## Fitur Utama
+### Authentication
+- Login admin
+- JWT Authentication
+- Protected API menggunakan middleware authentication
+- Logout
+- Get authenticated admin
 
-### Admin Web
+### Management Data
+- Manajemen kategori alat
+- Manajemen alat
+- Manajemen pelanggan
+- Manajemen penyewaan
+- Detail penyewaan
+- Pengembalian alat
 
-* Login admin
-* Dashboard statistik
-* Pengelolaan kategori alat
-* Pengelolaan data alat
-* Pengelolaan pelanggan
-* Pengelolaan penyewaan
-* Pengembalian alat
-* Laporan penyewaan
+### Dashboard & Laporan
+- Statistik dashboard
+- Data statistik penyewaan
+- Laporan penyewaan
 
-### Mobile App Pelanggan
-
-* Registrasi dan login
-* Melihat daftar alat
-* Melihat detail alat
-* Memilih alat untuk disewa
-* Checkout penyewaan
-* Melihat detail penyewaan
-* Melihat riwayat penyewaan
-* Pengelolaan profil pelanggan
-
-### Backend
-
-* RESTful API
-* Autentikasi JWT
-* Pengelolaan data alat
-* Pengelolaan kategori
-* Pengelolaan pelanggan
-* Pengelolaan transaksi penyewaan
-* Pengelolaan pengembalian
-* Integrasi database MySQL
+### Rental System
+- Perhitungan lama penyewaan
+- Perhitungan total harga penyewaan
+- Pengelolaan jumlah alat yang disewa
+- Pengelolaan stok alat
+- Status pembayaran
+- Status pengembalian
 
 ## Teknologi
 
-| Bagian         | Teknologi                 |
-| -------------- | ------------------------- |
-| Admin Web      | React.js, JavaScript, CSS |
-| Mobile         | React Native, TypeScript  |
-| Backend        | Laravel, PHP              |
-| Database       | MySQL                     |
-| API            | RESTful API               |
-| Authentication | JWT                       |
-| API Testing    | Postman                   |
+- PHP
+- Laravel
+- MySQL
+- RESTful API
+- JWT Authentication
+- Postman
 
-## Preview
+## Struktur API
 
-### Admin Dashboard
+API digunakan untuk menghubungkan backend dengan aplikasi frontend.
 
-> Screenshot dashboard akan ditambahkan di bagian ini.
+Beberapa endpoint utama yang tersedia:
 
-### Mobile App
+```text
+POST   /api/login
 
-> Screenshot aplikasi mobile akan ditambahkan di bagian ini.
+GET    /api/me
+POST   /api/logout
 
-## Repository
+GET    /api/dashboard
+GET    /api/dashboard/chart
 
-| Repository                 | Deskripsi                                   |
-| -------------------------- | ------------------------------------------- |
-| [amanah-elektronik-api]    | Backend REST API menggunakan Laravel        |
-| [amanah-elektronik-admin]  | Dashboard administrasi menggunakan React.js |
-| [amanah-elektronik-mobile] | Aplikasi pelanggan menggunakan React Native |
+GET    /api/kategori
+POST   /api/kategori
+PUT    /api/kategori/{id}
+DELETE /api/kategori/{id}
 
-## Peran Saya
+GET    /api/alat
+POST   /api/alat
+PUT    /api/alat/{id}
+DELETE /api/alat/{id}
 
-Dalam project ini saya mengembangkan beberapa bagian sistem, meliputi:
+GET    /api/pelanggan
+POST   /api/pelanggan
+PUT    /api/pelanggan/{id}
+DELETE /api/pelanggan/{id}
 
-* Mengembangkan antarmuka admin menggunakan React.js.
-* Mengembangkan aplikasi mobile pelanggan menggunakan React Native.
-* Mengembangkan dan mengintegrasikan RESTful API menggunakan Laravel.
-* Mengelola database menggunakan MySQL.
-* Mengintegrasikan frontend dan mobile dengan backend API.
-* Melakukan pengujian API menggunakan Postman.
+GET    /api/penyewaan
+POST   /api/penyewaan
+GET    /api/penyewaan/{id}
 
-## Status Project
-
-Project ini dikembangkan sebagai project pembelajaran dan pengembangan sistem penyewaan perangkat elektronik.
-
----
-
-**Amanah Elektronik — Rental Management System**
+GET    /api/penyewaan-detail
